@@ -1,10 +1,11 @@
 {
   "name": "service-manager-backend",
   "version": "0.0.1",
-  "description": "",
-  "author": "",
+  "description": "Backend para o sistema service manager: uma plataforma de gerenciamento de serviços utilizando Nest.js e MySQL.",
+  "author": "José Eduardo Martins",
   "private": true,
-  "license": "UNLICENSED",
+  "license": "MIT",
+  "main": "src/main.ts",
   "scripts": {
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
@@ -65,5 +66,9 @@
     ],
     "coverageDirectory": "../coverage",
     "testEnvironment": "node"
+  },
+  "engines": {
+    "node": "20.15.1",
+    "npm": "10.7.0"
   }
 }
