@@ -68,7 +68,7 @@
     "testEnvironment": "node"
   },
   "engines": {
-    "node": "20.15.1",
-    "npm": "10.7.0"
+    "node": "v20.15.1",
+    "npm": "10.8.1"
   }
 }
