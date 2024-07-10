@@ -4,7 +4,11 @@ import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
 //CONFIG
 import appConfig from './config/app.config';
 import databaseConfig from './config/database.config';
-
+//MODULES
+import { UserModule } from './modules/users/users.module';
+//DECORATORS
+import { ExistConstraint } from './common/decorators/is-exist.validator';
+import { UniqueConstraint } from './common/decorators/is-unique.validator';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -27,8 +31,9 @@ import databaseConfig from './config/database.config';
         }) as TypeOrmModuleOptions,
       inject: [ConfigService],
     }),
+    UserModule,
   ],
   controllers: [],
-  providers: [],
+  providers: [UniqueConstraint, ExistConstraint],
 })
 export class AppModule {}
