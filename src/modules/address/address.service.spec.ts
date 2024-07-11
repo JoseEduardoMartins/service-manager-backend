@@ -17,9 +17,9 @@ const findResponse = [
     complement: 'T1',
     number: 1,
     zipcode: '9999999',
-    country_id: 1,
-    state_id: 1,
-    city_id: 1,
+    countryId: 1,
+    stateId: 1,
+    cityId: 1,
   }),
   new Address({
     id: 2,
@@ -27,9 +27,9 @@ const findResponse = [
     complement: 'T2',
     number: 1,
     zipcode: '9999999',
-    country_id: 1,
-    state_id: 1,
-    city_id: 1,
+    countryId: 1,
+    stateId: 1,
+    cityId: 1,
   }),
   new Address({
     id: 3,
@@ -37,9 +37,9 @@ const findResponse = [
     complement: 'T3',
     number: 1,
     zipcode: '9999999',
-    country_id: 1,
-    state_id: 1,
-    city_id: 1,
+    countryId: 1,
+    stateId: 1,
+    cityId: 1,
   }),
 ];
 
@@ -49,9 +49,9 @@ const findOneResponse = new Address({
   complement: 'TT',
   number: 1,
   zipcode: '9999999',
-  country_id: 1,
-  state_id: 1,
-  city_id: 1,
+  countryId: 1,
+  stateId: 1,
+  cityId: 1,
 });
 
 const createResponse = new Address({
@@ -60,9 +60,9 @@ const createResponse = new Address({
   complement: 'TT',
   number: 1,
   zipcode: '9999999',
-  country_id: 1,
-  state_id: 1,
-  city_id: 1,
+  countryId: 1,
+  stateId: 1,
+  cityId: 1,
 });
 
 const createdResponse = { id: 1 };
@@ -73,9 +73,9 @@ const saveResponse = new Address({
   complement: 'TT',
   number: 1,
   zipcode: '9999999',
-  country_id: 1,
-  state_id: 1,
-  city_id: 1,
+  countryId: 1,
+  stateId: 1,
+  cityId: 1,
 });
 
 const updateResponse = new UpdateResponse({
@@ -157,9 +157,9 @@ describe('AddressService', () => {
     const body: CreateAddressDto = {
       street: 'teste-1',
       zipcode: '9999999',
-      country_id: 1,
-      state_id: 1,
-      city_id: 1,
+      countryId: 1,
+      stateId: 1,
+      cityId: 1,
     };
 
     it('should create a new sector entity successfuly', async () => {

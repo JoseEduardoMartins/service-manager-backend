@@ -12,9 +12,9 @@ const addressEtityList: Address[] = [
     complement: 'casa',
     number: 1,
     zipcode: '1111-111',
-    country_id: 1,
-    state_id: 1,
-    city_id: 1,
+    countryId: 1,
+    stateId: 1,
+    cityId: 1,
   }),
   new Address({
     id: 2,
@@ -22,9 +22,9 @@ const addressEtityList: Address[] = [
     complement: 'casa',
     number: 2,
     zipcode: '2222222',
-    country_id: 2,
-    state_id: 2,
-    city_id: 2,
+    countryId: 2,
+    stateId: 2,
+    cityId: 2,
   }),
   new Address({
     id: 3,
@@ -32,9 +32,9 @@ const addressEtityList: Address[] = [
     complement: 'casa',
     number: 3,
     zipcode: '3333333',
-    country_id: 3,
-    state_id: 3,
-    city_id: 3,
+    countryId: 3,
+    stateId: 3,
+    cityId: 3,
   }),
 ];
 
@@ -108,9 +108,9 @@ describe('AddressController', () => {
       complement: 'casa',
       number: 1,
       zipcode: '1111-111',
-      country_id: 1,
-      state_id: 1,
-      city_id: 1,
+      countryId: 1,
+      stateId: 1,
+      cityId: 1,
     };
 
     it('should create a new address entity successfuly', async () => {
@@ -135,9 +135,9 @@ describe('AddressController', () => {
       complement: 'casa',
       number: 1,
       zipcode: '1111-111',
-      country_id: 1,
-      state_id: 1,
-      city_id: 1,
+      countryId: 1,
+      stateId: 1,
+      cityId: 1,
     };
 
     it('should update a address entity successfuly', async () => {
