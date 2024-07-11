@@ -12,7 +12,7 @@ export class CreateCountryDto {
 
   @ApiProperty({ required: false })
   @IsString()
-  @Length(0, 4)
+  @Length(0, 10)
   @IsOptional()
   isocode?: string;
 

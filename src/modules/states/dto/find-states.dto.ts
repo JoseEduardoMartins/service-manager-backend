@@ -1,8 +1,15 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsString, IsArray, Length, IsOptional } from 'class-validator';
+import { Transform } from 'class-transformer';
+import {
+  IsArray,
+  IsNumber,
+  IsOptional,
+  IsString,
+  Length,
+} from 'class-validator';
 import { GenericParamsDto } from '../../../common/dtos/generic-params.dto';
 
-class FiltersCountryDto {
+class FiltersStateDto {
   @ApiProperty({ required: false })
   @IsString()
   @Length(0, 300)
@@ -11,20 +18,20 @@ class FiltersCountryDto {
 
   @ApiProperty({ required: false })
   @IsString()
-  @Length(0, 10)
+  @Length(0, 4)
   @IsOptional()
-  isocode?: string;
+  shortName?: string;
 
   @ApiProperty({ required: false })
-  @IsString()
-  @Length(0, 50)
+  @IsNumber()
+  @Transform(({ value }) => Number(value))
   @IsOptional()
-  phonecode?: string;
+  countryId?: number;
 }
 
-export class ParamsCountryDto extends GenericParamsDto<FiltersCountryDto> {}
+export class ParamsStateDto extends GenericParamsDto<FiltersStateDto> {}
 
-export class FindCountryDto extends FiltersCountryDto {
+export class FindStateDto extends FiltersStateDto {
   @ApiProperty({ required: false })
   @IsArray()
   @IsOptional()
