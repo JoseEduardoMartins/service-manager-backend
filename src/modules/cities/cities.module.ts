@@ -1,5 +1,6 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { AuthMiddleware } from 'src/common/middlewares/auth.middleware';
 import { CitiesController } from './cities.controller';
 import { CitiesService } from './cities.service';
 import { City } from './entities/city.entity';
@@ -10,4 +11,8 @@ import { City } from './entities/city.entity';
   controllers: [CitiesController],
   exports: [TypeOrmModule],
 })
-export class CitiesModule {}
+export class CitiesModule implements NestModule {
+  configure(consumer: MiddlewareConsumer): void {
+    consumer.apply(AuthMiddleware).forRoutes(CitiesController);
+  }
+}

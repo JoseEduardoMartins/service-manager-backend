@@ -4,10 +4,13 @@ import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
 //CONFIG
 import appConfig from './config/app.config';
 import databaseConfig from './config/database.config';
+import mailConfig from './config/mail.config';
 //MODULES
 import { AddressesModule } from './modules/address/address.module';
+import { AuthModule } from './modules/auth/auth.module';
 import { CitiesModule } from './modules/cities/cities.module';
 import { CountriesModule } from './modules/countries/countries.module';
+import { MailModule } from './modules/mails/mail.module';
 import { StatesModule } from './modules/states/states.module';
 import { UsersModule } from './modules/users/users.module';
 //DECORATORS
@@ -18,7 +21,7 @@ import { UniqueConstraint } from './common/decorators/is-unique.validator';
     ConfigModule.forRoot({
       envFilePath: ['.env'],
       isGlobal: true,
-      load: [appConfig, databaseConfig],
+      load: [appConfig, databaseConfig, mailConfig],
     }),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
@@ -36,8 +39,10 @@ import { UniqueConstraint } from './common/decorators/is-unique.validator';
       inject: [ConfigService],
     }),
     AddressesModule,
+    AuthModule,
     CitiesModule,
     CountriesModule,
+    MailModule,
     StatesModule,
     UsersModule,
   ],

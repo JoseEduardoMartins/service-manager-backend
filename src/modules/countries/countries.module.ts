@@ -1,5 +1,6 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { AuthMiddleware } from 'src/common/middlewares/auth.middleware';
 import { CountriesController } from './countries.controller';
 import { CountriesService } from './countries.service';
 import { Country } from './entities/country.entity';
@@ -10,4 +11,8 @@ import { Country } from './entities/country.entity';
   controllers: [CountriesController],
   exports: [TypeOrmModule],
 })
-export class CountriesModule {}
+export class CountriesModule implements NestModule {
+  configure(consumer: MiddlewareConsumer): void {
+    consumer.apply(AuthMiddleware).forRoutes(CountriesController);
+  }
+}

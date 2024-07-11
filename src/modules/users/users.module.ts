@@ -1,8 +1,9 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { AuthMiddleware } from 'src/common/middlewares/auth.middleware';
 import { User } from './entities/user.entity';
-import { UsersController } from './users.controller';
 import { UsersService } from './users.service';
+import { UsersController } from './users.controller';
 
 @Module({
   imports: [TypeOrmModule.forFeature([User])],
@@ -10,4 +11,8 @@ import { UsersService } from './users.service';
   controllers: [UsersController],
   exports: [TypeOrmModule],
 })
-export class UsersModule {}
+export class UsersModule implements NestModule {
+  configure(consumer: MiddlewareConsumer): void {
+    consumer.apply(AuthMiddleware).forRoutes(UsersController);
+  }
+}
