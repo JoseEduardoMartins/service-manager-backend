@@ -6,6 +6,7 @@ import {
   IsNumber,
   IsOptional,
   IsString,
+  IsUrl,
   Length,
 } from 'class-validator';
 import { Unique } from '../../../common/decorators/is-unique.decorator';
@@ -30,6 +31,11 @@ export class CreateUserDto {
   @Length(0, 50)
   @Unique(User, 'phone')
   phone: string;
+
+  @ApiProperty({ required: true })
+  @IsUrl()
+  @Length(0, 300)
+  photo: string;
 
   @ApiProperty({ required: true })
   @IsString()

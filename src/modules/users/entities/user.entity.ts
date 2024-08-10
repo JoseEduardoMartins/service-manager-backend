@@ -38,6 +38,14 @@ export class User {
 
   @Column({
     type: 'varchar',
+    name: 'photo',
+    length: 300,
+    nullable: true,
+  })
+  photo?: string;
+
+  @Column({
+    type: 'varchar',
     name: 'tax_id',
     length: 50,
     unique: true,
