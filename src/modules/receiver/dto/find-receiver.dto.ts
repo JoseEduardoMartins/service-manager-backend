@@ -9,7 +9,7 @@ import {
 } from 'class-validator';
 import { GenericParamsDto } from '../../../common/dtos/generic-params.dto';
 
-class FiltersProviderDto {
+class FiltersReceiverDto {
   @ApiProperty({ required: false })
   @IsNumber()
   @IsOptional()
@@ -21,17 +21,11 @@ class FiltersProviderDto {
   @Length(0, 14)
   @IsOptional()
   taxId?: string;
-
-  @ApiProperty({ required: false })
-  @IsNumber()
-  @Transform(({ value }) => Number(value))
-  @IsOptional()
-  sectorId?: number;
 }
 
-export class ParamsProviderDto extends GenericParamsDto<FiltersProviderDto> {}
+export class ParamsReceiverDto extends GenericParamsDto<FiltersReceiverDto> {}
 
-export class FindProviderDto extends FiltersProviderDto {
+export class FindReceiverDto extends FiltersReceiverDto {
   @ApiProperty({ required: false })
   @IsArray()
   @IsOptional()
