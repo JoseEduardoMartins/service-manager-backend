@@ -1,15 +1,4 @@
-import { ApiProperty } from '@nestjs/swagger';
-import { Transform } from 'class-transformer';
-import { IsOptional, IsString, Length } from 'class-validator';
-import { Unique } from '../../../common/decorators/is-unique';
-import { Provider } from '../entities/provider.entity';
+import { PartialType } from '@nestjs/swagger';
+import { CreateProviderDto } from './create-provider.dto';
 
-export class UpdateProviderDto {
-  @ApiProperty({ required: false })
-  @IsString()
-  @Transform(({ value }) => value.replace(/\D/g, ''))
-  @Length(0, 11)
-  @Unique(Provider, 'taxId')
-  @IsOptional()
-  taxId?: string;
-}
+export class UpdateProviderDto extends PartialType(CreateProviderDto) {}

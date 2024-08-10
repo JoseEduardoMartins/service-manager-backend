@@ -46,14 +46,6 @@ export class User {
 
   @Column({
     type: 'varchar',
-    name: 'tax_id',
-    length: 50,
-    unique: true,
-  })
-  taxId: string;
-
-  @Column({
-    type: 'varchar',
     name: 'email',
     length: 300,
     unique: true,
@@ -126,8 +118,8 @@ export class User {
     this.id = user?.id;
     this.name = user?.name;
     this.birthdate = user?.birthdate;
+    this.photo = user?.photo;
     this.phone = user?.phone;
-    this.taxId = user?.taxId;
     this.email = user?.email;
     this.password = user?.password;
     this.securityCode = user?.securityCode;

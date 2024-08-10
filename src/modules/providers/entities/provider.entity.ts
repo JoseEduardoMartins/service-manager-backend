@@ -66,8 +66,9 @@ export class Provider {
   @Column({
     name: 'sector_id',
     type: 'int',
+    nullable: true,
   })
-  sectorId: number;
+  sectorId?: number;
 
   constructor(city?: Partial<Provider>) {
     this.id = city?.id;

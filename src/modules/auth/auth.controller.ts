@@ -19,6 +19,9 @@ import { UsersService } from '../users/users.service';
 import { ConfirmAuthDto } from './dto/confirm-auth.dto';
 import { SignInAuthDto } from './dto/sign-in-auth.dto';
 import { SignUpAuthDto } from './dto/sign-up-auth.dto';
+import { ProvidersService } from '../providers/providers.service';
+import { ReceiversService } from '../receiver/receivers.service';
+import { GenericCreateResponse } from 'src/common/interfaces/generic-response';
 
 @ApiTags('Auth')
 @ApiBearerAuth()
@@ -28,6 +31,8 @@ export class AuthController {
     private jwtService: JwtService,
     private mailService: MailService,
     private usersService: UsersService,
+    private providersService: ProvidersService,
+    private receiversService: ReceiversService,
   ) {}
 
   @ApiOperation({
@@ -41,13 +46,34 @@ export class AuthController {
     @Res({ passthrough: true }) response: Response,
     @Body() loginAuthDto: SignInAuthDto,
   ): Promise<any> {
-    const { email, password } = loginAuthDto;
+    const { userType, email, password } = loginAuthDto;
 
-    const [user] = await this.usersService.find({
+    const [responseUser] = await this.usersService.find({
       where: { email },
     });
 
-    if (!user) throw new UnauthorizedException(['Invalid email or password']);
+    if (!responseUser)
+      throw new UnauthorizedException(['Invalid email or password']);
+
+    const [responseUserType] =
+      userType === 'provider'
+        ? await this.providersService.find({
+            select: ['id', 'userId', 'taxId'],
+            where: { userId: responseUser.id },
+          })
+        : await this.receiversService.find({
+            select: ['id', 'userId', 'taxId'],
+            where: { userId: responseUser.id },
+          });
+
+    if (!responseUserType)
+      throw new UnauthorizedException(['Invalid email or password']);
+
+    const user = {
+      ...responseUser,
+      ...responseUserType,
+      userType,
+    };
 
     if (user?.password !== password)
       throw new UnauthorizedException(['Invalid email or password']);
@@ -64,7 +90,8 @@ export class AuthController {
       throw new UnauthorizedException(['User is deleted, check your email']);
 
     const token = await this.jwtService.signAsync({
-      role: 'user',
+      role: userType,
+      taxId: user.taxId,
       email: user.email,
     });
 
@@ -97,20 +124,36 @@ export class AuthController {
   })
   @Post('sign-up')
   @HttpCode(HttpStatus.CREATED)
-  async signUp(@Body() registerAuthDto: SignUpAuthDto) {
+  async signUp(@Body() signUpAuthDto: SignUpAuthDto) {
+    const { userType, taxId, ...signUpAuth } = signUpAuthDto;
+
     const securityCode = generateRandomText(6, '123456789');
 
-    const response = await this.usersService.create({
-      ...registerAuthDto,
+    const { id: userId } = await this.usersService.create({
+      ...signUpAuth,
       securityCode,
     });
 
+    let response: GenericCreateResponse;
+
+    if (userType === 'provider') {
+      response = await this.providersService.create({
+        userId,
+        taxId,
+      });
+    } else {
+      response = await this.receiversService.create({
+        userId,
+        taxId,
+      });
+    }
+
     this.mailService.sendMail({
-      to: registerAuthDto.email,
+      to: signUpAuth.email,
       subject: 'Welcome to Nice App! Confirm your Email',
       template: './welcome',
       context: {
-        name: registerAuthDto.name,
+        name: signUpAuth.name,
         securityCode,
       },
     });

@@ -32,17 +32,11 @@ export class CreateUserDto {
   @Unique(User, 'phone')
   phone: string;
 
-  @ApiProperty({ required: true })
+  @ApiProperty({ required: false })
   @IsUrl()
   @Length(0, 300)
-  photo: string;
-
-  @ApiProperty({ required: true })
-  @IsString()
-  @Transform(({ value }) => value.replace(/\D/g, ''))
-  @Length(0, 50)
-  @Unique(User, 'taxId')
-  taxId: string;
+  @IsOptional()
+  photo?: string;
 
   @ApiProperty({ required: true })
   @IsEmail()

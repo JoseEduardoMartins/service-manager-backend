@@ -51,8 +51,9 @@ export class CreateProviderDto {
   @IsOptional()
   homepageLink?: string;
 
-  @ApiProperty({ required: true })
+  @ApiProperty({ required: false })
   @IsNumber()
   @Exist(Sector, 'id')
-  sectorId: number;
+  @IsOptional()
+  sectorId?: number;
 }
