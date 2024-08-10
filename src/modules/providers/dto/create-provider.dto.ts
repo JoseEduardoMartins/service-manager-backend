@@ -2,8 +2,8 @@ import { ApiProperty } from '@nestjs/swagger';
 import { Transform } from 'class-transformer';
 import { IsNumber, IsOptional, IsString, IsUrl, Length } from 'class-validator';
 import { User } from 'src/modules/users/entities/user.entity';
-import { Exist } from '../../../common/decorators/is-exist.decorator';
-import { Unique } from '../../../common/decorators/is-unique.decorator';
+import { Exist } from '../../../common/decorators/is-exist';
+import { Unique } from '../../../common/decorators/is-unique';
 import { Sector } from '../../sectors/entities/sector.entity';
 import { Provider } from '../entities/provider.entity';
 

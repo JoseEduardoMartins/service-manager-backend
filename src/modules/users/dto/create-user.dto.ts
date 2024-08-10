@@ -9,7 +9,7 @@ import {
   IsUrl,
   Length,
 } from 'class-validator';
-import { Unique } from '../../../common/decorators/is-unique.decorator';
+import { Unique } from '../../../common/decorators/is-unique';
 import { encrypt } from '../../../common/helpers/crypto';
 import { formatDate } from '../../../common/helpers/date';
 import { User } from '../entities/user.entity';

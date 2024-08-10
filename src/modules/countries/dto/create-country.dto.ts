@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsString, IsOptional, Length } from 'class-validator';
-import { Unique } from '../../../common/decorators/is-unique.decorator';
+import { Unique } from '../../../common/decorators/is-unique';
 import { Country } from '../entities/country.entity';
 
 export class CreateCountryDto {

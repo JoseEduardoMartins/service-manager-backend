@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsString, IsNumber, IsOptional, Length } from 'class-validator';
-import { Exist } from '../../../common/decorators/is-exist.decorator';
+import { Exist } from '../../../common/decorators/is-exist';
 import { Country } from '../../countries/entities/country.entity';
 import { State } from '../../states/entities/state.entity';
 import { City } from '../../cities/entities/city.entity';

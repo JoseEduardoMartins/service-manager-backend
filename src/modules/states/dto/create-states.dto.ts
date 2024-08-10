@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsNumber, IsString, IsOptional, Length } from 'class-validator';
-import { Exist } from '../../../common/decorators/is-exist.decorator';
+import { Exist } from '../../../common/decorators/is-exist';
 import { Country } from '../../../modules/countries/entities/country.entity';
 
 export class CreateStateDto {
