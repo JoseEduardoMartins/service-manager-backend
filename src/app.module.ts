@@ -11,6 +11,7 @@ import { AuthModule } from './modules/auth/auth.module';
 import { CitiesModule } from './modules/cities/cities.module';
 import { CountriesModule } from './modules/countries/countries.module';
 import { MailModule } from './modules/mails/mail.module';
+import { SectorsModule } from './modules/sectors/sectors.module';
 import { StatesModule } from './modules/states/states.module';
 import { UsersModule } from './modules/users/users.module';
 //DECORATORS
@@ -43,6 +44,7 @@ import { UniqueConstraint } from './common/decorators/is-unique.validator';
     CitiesModule,
     CountriesModule,
     MailModule,
+    SectorsModule,
     StatesModule,
     UsersModule,
   ],

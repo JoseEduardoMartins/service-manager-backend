@@ -130,6 +130,7 @@ describe('UsersService', () => {
       name: 'test-1',
       birthdate: '2000-03-30T00:00:00.000Z',
       phone: '48 9 9999 9999',
+      photo: 'https://chatgpt.com/',
       taxId: '999.999.999-99',
       email: 'teste1@email.com',
       password: 'teste1',

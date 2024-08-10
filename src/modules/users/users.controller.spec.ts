@@ -92,8 +92,9 @@ describe('UsersController', () => {
   });
 
   describe('findOne', () => {
+    const id = 1;
+
     it('should return a user entity successfully', async () => {
-      const id = 1;
       const result = await usersController.findOne(id);
 
       expect(result).toEqual(findOneResponse);
@@ -104,7 +105,7 @@ describe('UsersController', () => {
 
     it('should throw an exception', () => {
       jest.spyOn(usersService, 'findOne').mockRejectedValueOnce(new Error());
-      expect(usersController.findOne(1)).rejects.toThrowError();
+      expect(usersController.findOne(id)).rejects.toThrowError();
     });
   });
 
@@ -113,6 +114,7 @@ describe('UsersController', () => {
       name: 'test-1',
       birthdate: '2000-03-30T00:00:00.000Z',
       phone: '48 9 9999 9999',
+      photo: 'https://chatgpt.com/',
       taxId: '999.999.999-99',
       email: 'teste1@email.com',
       password: 'teste1',
