@@ -195,16 +195,34 @@ export class AuthController {
     const token = request.headers.token || request.cookies.token;
     const decodedToken = await this.jwtService.decode(token);
 
-    const { email } = decodedToken;
+    const { role, email } = decodedToken;
 
-    const [user] = await this.usersService.find({
+    const [responseUser] = await this.usersService.find({
       select: ['id', 'name', 'phone', 'email', 'password'],
       where: { email },
     });
 
+    const [responseUserType] =
+      role === 'provider'
+        ? await this.providersService.find({
+            select: ['id', 'userId', 'taxId'],
+            where: { userId: responseUser.id },
+          })
+        : await this.receiversService.find({
+            select: ['id', 'userId', 'taxId'],
+            where: { userId: responseUser.id },
+          });
+
+    const user = {
+      ...responseUser,
+      ...responseUserType,
+      userType: role,
+    };
+
     const renewedToken = await this.jwtService.signAsync({
-      role: 'user',
-      email: user.email,
+      role,
+      taxId: user.taxId,
+      email,
     });
 
     return { user, token: renewedToken };
