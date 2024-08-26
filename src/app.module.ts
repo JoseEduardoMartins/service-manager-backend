@@ -14,6 +14,7 @@ import { MailModule } from './modules/mails/mail.module';
 import { ProvidersModule } from './modules/providers/providers.module';
 import { ReceiversModule } from './modules/receiver/receivers.module';
 import { SectorsModule } from './modules/sectors/sectors.module';
+import { ServicesModule } from './modules/services/services.module';
 import { StatesModule } from './modules/states/states.module';
 import { UsersModule } from './modules/users/users.module';
 //DECORATORS
@@ -49,6 +50,7 @@ import { UniqueConstraint } from './common/decorators/is-unique';
     ProvidersModule,
     ReceiversModule,
     SectorsModule,
+    ServicesModule,
     StatesModule,
     UsersModule,
   ],
