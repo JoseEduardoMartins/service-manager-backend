@@ -22,7 +22,14 @@ export class ServicesService {
   }
 
   async create(createServiceDto: CreateServiceDto) {
-    const state = this.serviceRepository.create(createServiceDto);
+    const data = {
+      ...createServiceDto,
+      isActived: true,
+      isDeleted: false,
+      createdAt: new Date(),
+    };
+
+    const state = this.serviceRepository.create(data);
     const response = await this.serviceRepository.save(state);
     return { id: response.id };
   }
@@ -36,7 +43,13 @@ export class ServicesService {
   }
 
   async remove(id: number): Promise<void> {
-    const response = await this.serviceRepository.delete({ id });
+    const data = {
+      isActived: false,
+      isDeleted: true,
+      deletedAt: new Date(),
+    };
+
+    const response = await this.serviceRepository.update({ id }, data);
     if (response?.affected === 0) return null;
   }
 }

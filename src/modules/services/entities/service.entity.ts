@@ -30,6 +30,33 @@ export class Service {
   recommendedPrice: number;
 
   @Column({
+    type: 'boolean',
+    name: 'is_actived',
+    default: true,
+  })
+  isActived: boolean;
+
+  @Column({
+    type: 'boolean',
+    name: 'is_deleted',
+    default: false,
+  })
+  isDeleted: boolean;
+
+  @Column({
+    type: 'datetime',
+    name: 'created_at',
+  })
+  createdAt: Date;
+
+  @Column({
+    type: 'datetime',
+    name: 'deleted_at',
+    nullable: true,
+  })
+  deletedAt?: Date;
+
+  @Column({
     type: 'int',
     name: 'provider_id',
   })
