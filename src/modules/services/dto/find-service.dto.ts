@@ -1,14 +1,35 @@
 import { ApiProperty } from '@nestjs/swagger';
 import {
   IsArray,
+  IsIn,
   IsNumber,
   IsOptional,
   IsString,
   Length,
 } from 'class-validator';
-import { GenericParamsDto } from '../../../common/dtos/generic-params.dto';
 
-class FiltersServiceDto {
+const fields = [
+  'id',
+  'name',
+  'description',
+  'recommendedPrice',
+  'isActived',
+  'isDeleted',
+  'createdAt',
+  'deletedAt',
+  'providerId',
+];
+
+export class FieldsServiceDto {
+  @ApiProperty({ required: false })
+  @IsArray({
+    groups: fields,
+  })
+  @IsOptional()
+  fields?: Array<string>;
+}
+
+export class FiltersServiceDto {
   @ApiProperty({ required: false })
   @IsString()
   @Length(0, 300)
@@ -32,11 +53,14 @@ class FiltersServiceDto {
   providerId?: number;
 }
 
-export class ParamsServiceDto extends GenericParamsDto<FiltersServiceDto> {}
-
-export class FindServiceDto extends FiltersServiceDto {
+export class OrderByServiceDto {
   @ApiProperty({ required: false })
-  @IsArray()
   @IsOptional()
-  select?: Array<string>;
+  @IsIn(fields)
+  orderField?: string;
+
+  @ApiProperty({ required: false })
+  @IsOptional()
+  @IsIn(['ASC', 'DESC'])
+  orderBy?: 'ASC' | 'DESC';
 }

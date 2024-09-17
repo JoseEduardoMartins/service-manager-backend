@@ -67,6 +67,10 @@ export class Service {
     this.name = service?.name;
     this.description = service?.description;
     this.recommendedPrice = service?.recommendedPrice;
+    this.isActived = service?.isActived;
+    this.isDeleted = service?.isDeleted;
+    this.createdAt = service?.createdAt;
+    this.deletedAt = service?.deletedAt;
     this.providerId = service?.providerId;
   }
 }

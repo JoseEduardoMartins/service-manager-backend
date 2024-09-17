@@ -1,23 +1,27 @@
 import {
-  Controller,
-  Get,
-  Post,
-  Patch,
-  Delete,
-  Param,
-  Query,
   Body,
+  Controller,
+  Delete,
+  Get,
   HttpCode,
-  HttpStatus,
   HttpException,
+  HttpStatus,
+  Param,
   ParseIntPipe,
+  Patch,
+  Post,
+  Query,
 } from '@nestjs/common';
-import { ApiTags, ApiOperation } from '@nestjs/swagger';
-import { getParams } from '../../common/helpers/params';
-import { ServicesService } from './services.service';
-import { FindServiceDto } from './dto/find-service.dto';
+import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { CreateServiceDto } from './dto/create-service.dto';
+import {
+  FieldsServiceDto,
+  FiltersServiceDto,
+  OrderByServiceDto,
+} from './dto/find-service.dto';
 import { UpdateServiceDto } from './dto/update-service.dto';
+import { ServicesService } from './services.service';
+import { getOrderBy, getSelects } from 'src/common/helpers/params';
 
 @ApiTags('Services')
 @Controller('services')
@@ -29,8 +33,17 @@ export class ServicesController {
     tags: ['Service'],
   })
   @Get()
-  find(@Query() query?: FindServiceDto) {
-    const params = getParams(query);
+  find(
+    @Query() fields: FieldsServiceDto,
+    @Query() filters: FiltersServiceDto,
+    @Query() orderBy: OrderByServiceDto,
+  ) {
+    const params = {
+      select: getSelects(fields.fields),
+      where: filters,
+      order: getOrderBy(orderBy),
+    };
+
     return this.servicesService.find(params);
   }
 

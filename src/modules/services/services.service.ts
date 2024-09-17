@@ -2,7 +2,6 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Service } from './entities/service.entity';
-import { ParamsServiceDto } from './dto/find-service.dto';
 import { CreateServiceDto } from './dto/create-service.dto';
 import { UpdateServiceDto } from './dto/update-service.dto';
 
@@ -13,7 +12,7 @@ export class ServicesService {
     private serviceRepository: Repository<Service>,
   ) {}
 
-  find(paramsServiceDto?: ParamsServiceDto): Promise<Service[]> {
+  find(paramsServiceDto): Promise<Service[]> {
     return this.serviceRepository.find(paramsServiceDto);
   }
 
